@@ -1,5 +1,5 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// import 'package:flutter/src/foundation/key.dart';
+// import 'package:flutter/src/widgets/framework.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,11 +28,13 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Barcode Scanner'),
+        title: const Text('Barcode Scanner'),
         centerTitle: true,
       ),
       body: Center(
-        child: _image == null ? Text('No Image Selected') : Image.file(_image!),
+        child: _image == null
+            ? const Text('No Image Selected')
+            : Image.file(_image!),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,

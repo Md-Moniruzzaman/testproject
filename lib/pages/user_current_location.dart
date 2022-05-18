@@ -12,10 +12,10 @@ class UserCurrentLocation extends StatefulWidget {
 }
 
 class _UserCurrentLocationState extends State<UserCurrentLocation> {
+  String location = 'Null, Press Button';
+
   @override
   Widget build(BuildContext context) {
-    String location = 'Null, Press Button';
-
     Future<Position> _getGeoLocationPosition() async {
       bool serviceEnabled;
       LocationPermission permission;
@@ -47,6 +47,10 @@ class _UserCurrentLocationState extends State<UserCurrentLocation> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Title(
+            color: Colors.white, child: const Text('Welcome to our HomePage')),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +64,7 @@ class _UserCurrentLocationState extends State<UserCurrentLocation> {
             ),
             Text(
               location,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              style: const TextStyle(color: Colors.black, fontSize: 16),
             ),
             const SizedBox(
               height: 10,
