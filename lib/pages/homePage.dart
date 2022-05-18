@@ -1,8 +1,11 @@
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:testproject/pages/barcodeScannerPage.dart';
 import 'package:testproject/pages/imagePickerPage.dart';
+import 'package:testproject/pages/user_current_location.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -69,7 +72,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   color: Colors.cyan,
                   textColor: Colors.black,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => UserCurrentLocation()));
+                  },
                 ),
               )
             ],
