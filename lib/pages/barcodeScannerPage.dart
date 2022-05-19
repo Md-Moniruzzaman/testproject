@@ -24,6 +24,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
       setState(() {
         _result = _scanResult;
       });
+      // print(_result);
     } catch (e) {
       _errorMessage = '_errorMessage $e';
 
