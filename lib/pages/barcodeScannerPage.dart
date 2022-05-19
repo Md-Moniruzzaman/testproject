@@ -12,7 +12,7 @@ class BarcodeScannerPage extends StatefulWidget {
 
 class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
   String _result = 'Click Scan button for start to scan';
-  String _scanButtonLabel = 'Scan';
+  final String _scanButtonLabel = 'Scan';
   String _scanResult = '(Empty result)';
   String _errorMessage = 'Unknown error';
 
@@ -25,7 +25,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
         _result = _scanResult;
       });
     } catch (e) {
-      _errorMessage = '$_errorMessage $e';
+      _errorMessage = '_errorMessage $e';
 
       setState(() {
         _result = _errorMessage;
@@ -37,18 +37,21 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Barcode Scanner'),
+        backgroundColor: Colors.redAccent,
+        title: const Text('Barcode Scanner'),
         centerTitle: true,
       ),
       body: Center(
-        child: Text('$_result'),
+        child: Text(_result),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.scanner),
-        label: Text('$_scanButtonLabel'),
+        icon: const Icon(Icons.scanner),
+        label: Text(_scanButtonLabel),
         onPressed: _scanCode,
+        autofocus: true,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
     );
   }
 }

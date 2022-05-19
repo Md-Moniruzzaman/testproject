@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:testproject/pages/barcodeScannerPage.dart';
 import 'package:testproject/pages/imagePickerPage.dart';
+import 'package:testproject/pages/site_webView.dart';
 import 'package:testproject/pages/user_current_location.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,14 +19,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.withOpacity(.2),
+      backgroundColor: Color.fromARGB(255, 121, 78, 78).withOpacity(.2),
       appBar: AppBar(
+        backgroundColor: Colors.redAccent,
         title: Title(
             color: Colors.white, child: const Text('Welcome to our HomePage')),
       ),
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,13 +40,13 @@ class _HomePageState extends State<HomePage> {
                     'Scanner',
                     style: TextStyle(fontSize: 20.0),
                   ),
-                  color: Colors.cyan,
+                  color: Color.fromARGB(255, 197, 111, 111),
                   textColor: Colors.black,
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => BarcodeScannerPage()));
+                            builder: (_) => const BarcodeScannerPage()));
                   },
                 ),
               ),
@@ -55,11 +57,13 @@ class _HomePageState extends State<HomePage> {
                     'Image Picker',
                     style: TextStyle(fontSize: 20.0),
                   ),
-                  color: Colors.cyan,
+                  color: Color.fromARGB(255, 197, 111, 111),
                   textColor: Colors.black,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => ImagePickerPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ImagePickerPage()));
                   },
                 ),
               ),
@@ -70,16 +74,33 @@ class _HomePageState extends State<HomePage> {
                     'Current location',
                     style: TextStyle(fontSize: 20.0),
                   ),
-                  color: Colors.cyan,
+                  color: Color.fromARGB(255, 197, 111, 111),
                   textColor: Colors.black,
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (_) => UserCurrentLocation()));
+                            builder: (_) => const UserCurrentLocation()));
                   },
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.all(25),
+                child: FlatButton(
+                  child: Text(
+                    'Site Webview ',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  color: Color.fromARGB(255, 197, 111, 111),
+                  textColor: Colors.black,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const SiteInWebView()));
+                  },
+                ),
+              ),
             ],
           ),
         ),
