@@ -3,7 +3,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testproject/pages/loginPage.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -13,6 +16,8 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  final _formkey = GlobalKey<FormState>();
+
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -149,6 +154,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
     );
 
+    Future<void> _saveToShared_Preferences() async {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString("firstName", firstNameController.text.toString());
+      prefs.setString("lastName", lastNameController.text.toString());
+      prefs.setString("email", emailController.text.toString());
+      prefs.setString("password", passwordController.text.toString());
+      prefs.setString(
+          "confirmPassword", confirmPasswordController.text.toString());
+    }
+
 // Registration Button
     final registrationButton = Material(
       elevation: 5,
@@ -164,8 +179,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
           ),
         ),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => LoginPage()));
+          if (_formkey.currentState!.validate()) {
+            _saveToShared_Preferences();
+            showTopSnackBar(
+              context,
+              CustomSnackBar.success(
+                message:
+                    "Good job, your data is saved successful. Have a nice day",
+              ),
+            );
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => LoginPage()));
+          }
         },
       ),
     );
@@ -175,30 +200,33 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Registration Page',
-                    style:
-                        TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),
+            child: Form(
+              key: _formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      'Registration Page',
+                      style: TextStyle(
+                          fontSize: 21.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                SizedBox(height: 150.0),
-                firstNameFormField,
-                SizedBox(height: 10.0),
-                lastNameFormField,
-                SizedBox(height: 10.0),
-                emailFormField,
-                SizedBox(height: 10.0),
-                passwordFormField,
-                SizedBox(height: 10.0),
-                confirmPasswordField,
-                SizedBox(height: 10.0),
-                registrationButton,
-              ],
+                  SizedBox(height: 150.0),
+                  firstNameFormField,
+                  SizedBox(height: 10.0),
+                  lastNameFormField,
+                  SizedBox(height: 10.0),
+                  emailFormField,
+                  SizedBox(height: 10.0),
+                  passwordFormField,
+                  SizedBox(height: 10.0),
+                  confirmPasswordField,
+                  SizedBox(height: 10.0),
+                  registrationButton,
+                ],
+              ),
             ),
           ),
         ),
